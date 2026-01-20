@@ -1,0 +1,29 @@
+﻿name: Selenium Smart CI
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Decide execution mode
+        run: |
+          if findstr /i "run.only.merged.tests=ON" src/test/resources/config.properties; then
+            echo "Running impacted tests only"
+          else
+            echo "Running full suite"
+          fi
+
+      - name: Run Tests
+        run: mvn test

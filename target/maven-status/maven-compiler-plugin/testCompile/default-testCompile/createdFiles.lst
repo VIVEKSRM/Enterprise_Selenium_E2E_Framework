@@ -1,0 +1,6 @@
+tests\SoftAssertDemoTest.class
+tests\FrameworkSmokeTest.class
+core\base\BaseTest.class
+tests\FeatureTests.class
+tests\E2EFeatureTest.class
+tests\SelfHealingDemoTest.class

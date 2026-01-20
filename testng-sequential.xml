@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="AllTests-Sequential" parallel="false">
+  <listeners>
+    <listener class-name="core.listeners.TestListener"/>
+  </listeners>
+
+  <test name="AllTests">
+    <classes>
+      <class name="tests.FrameworkSmokeTest"/>
+      <class name="tests.SoftAssertDemoTest"/>
+      <class name="tests.E2EFeatureTest"/>
+      <class name="tests.SelfHealingDemoTest"/>
+      <class name="tests.FeatureTests"/>
+    </classes>
+  </test>
+</suite>
