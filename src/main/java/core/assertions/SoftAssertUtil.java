@@ -1,5 +1,7 @@
 package core.assertions;
 
+import core.reporting.ExtentManager;
+
 /**
  * Simplified soft-assert utility that prints messages and throws on failure in this demo.
  */
@@ -10,7 +12,9 @@ public final class SoftAssertUtil {
     public static void verify(boolean condition, String passMsg, String failMsg) {
         if (condition) {
             System.out.println("ASSERT PASS: " + passMsg);
+            try { ExtentManager.log("ASSERT PASS: " + passMsg); } catch (Exception ignored) {}
         } else {
+            try { ExtentManager.fail(failMsg); } catch (Exception ignored) {}
             throw new AssertionError(failMsg);
         }
     }
