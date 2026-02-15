@@ -1,0 +1,131 @@
+version: '3.8'
+services:
+  selenium-hub:
+    image: selenium/hub:4.21
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+      - "4442:4442"
+      - "4443:4443"
+    environment:
+      - SE_SESSION_REQUEST_TIMEOUT=300
+      - SE_SESSION_RETRY_INTERVAL=5
+    networks:
+      - selenium-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4444/wd/hub/status"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # Chrome Nodes for Parallel Execution
+  chrome-node-1:
+    image: selenium/node-chrome:4.21
+    container_name: chrome-node-1
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=2
+      - SE_NODE_SESSION_TIMEOUT=300
+      - NODE_MAX_INSTANCES=2
+    ports:
+      - "7900:7900"
+    shm_size: 2gb
+    networks:
+      - selenium-network
+    depends_on:
+      selenium-hub:
+        condition: service_healthy
+
+  chrome-node-2:
+    image: selenium/node-chrome:4.21
+    container_name: chrome-node-2
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=2
+      - SE_NODE_SESSION_TIMEOUT=300
+      - NODE_MAX_INSTANCES=2
+    ports:
+      - "7901:7900"
+    shm_size: 2gb
+    networks:
+      - selenium-network
+    depends_on:
+      selenium-hub:
+        condition: service_healthy
+
+  chrome-node-3:
+    image: selenium/node-chrome:4.21
+    container_name: chrome-node-3
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=2
+      - SE_NODE_SESSION_TIMEOUT=300
+      - NODE_MAX_INSTANCES=2
+    ports:
+      - "7902:7900"
+    shm_size: 2gb
+    networks:
+      - selenium-network
+    depends_on:
+      selenium-hub:
+        condition: service_healthy
+
+  # Firefox Nodes for Parallel Execution (optional, uncomment if needed)
+  firefox-node-1:
+    image: selenium/node-firefox:4.21
+    container_name: firefox-node-1
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=2
+      - SE_NODE_SESSION_TIMEOUT=300
+      - NODE_MAX_INSTANCES=2
+    ports:
+      - "7903:7900"
+    shm_size: 2gb
+    networks:
+      - selenium-network
+    depends_on:
+      selenium-hub:
+        condition: service_healthy
+
+  firefox-node-2:
+    image: selenium/node-firefox:4.21
+    container_name: firefox-node-2
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=2
+      - SE_NODE_SESSION_TIMEOUT=300
+      - NODE_MAX_INSTANCES=2
+    ports:
+      - "7904:7900"
+    shm_size: 2gb
+    networks:
+      - selenium-network
+    depends_on:
+      selenium-hub:
+        condition: service_healthy
+
+networks:
+  selenium-network:
+    driver: bridge
+
