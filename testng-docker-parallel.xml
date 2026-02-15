@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="DockerParallelSuite" parallel="tests" thread-count="5" verbose="2">
+    <listeners>
+        <listener class-name="core.listeners.TestListener"/>
+    </listeners>
+
+    <test name="SmokeTest_1" preserve-order="true">
+        <classes>
+            <class name="tests.FrameworkSmokeTest">
+                <methods>
+                    <include name="navigationTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="SmokeTest_2" preserve-order="true">
+        <classes>
+            <class name="tests.FrameworkSmokeTest">
+                <methods>
+                    <include name="elementInteractionTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="SmokeTest_3" preserve-order="true">
+        <classes>
+            <class name="tests.FrameworkSmokeTest">
+                <methods>
+                    <include name="formSubmissionTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="SmokeTest_4" preserve-order="true">
+        <classes>
+            <class name="tests.FrameworkSmokeTest">
+                <methods>
+                    <include name="windowHandlesTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="SmokeTest_5" preserve-order="true">
+        <classes>
+            <class name="tests.FrameworkSmokeTest">
+                <methods>
+                    <include name="screenshotTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
+
