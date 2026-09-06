@@ -13,62 +13,33 @@ import utils.AuthenticationService;
  */
 public class LoginTest extends BaseTest {
 
-    private final AuthenticationService authentication =
-            new AuthenticationService();
+    private final AuthenticationService authentication =new AuthenticationService();
 
     /**
      * Test 1: Verify successful login using valid credentials.
      */
-    @Test(
-            description = "Verify successful login with valid credentials",
-            priority = 1
-    )
+    @Test(description = "Verify successful login with valid credentials",priority = 1)
     public void verifySuccessfulLogin() {
 
-        ExtentManager.log(
-                "Starting successful login test"
-        );
-
+        ExtentManager.log("Starting successful login test");
         try {
-            ExtentManager.log(
-                    "Attempting login using valid credentials"
-            );
+            ExtentManager.log("Attempting login using valid credentials");
+            HomePage homePage =authentication.login();
+            ExtentManager.log("Valid credentials submitted successfully");
 
-            HomePage homePage =
-                    authentication.login();
+            boolean isLoggedIn =homePage.isUserLoggedIn();
+            Assert.assertTrue(isLoggedIn,"User should be logged in successfully");
 
-            ExtentManager.log(
-                    "Valid credentials submitted successfully"
-            );
-
-            boolean isLoggedIn =
-                    homePage.isUserLoggedIn();
-
-            Assert.assertTrue(
-                    isLoggedIn,
-                    "User should be logged in successfully"
-            );
-
-            ExtentManager.pass(
-                    "User logged in successfully"
-            );
+            ExtentManager.pass("User logged in successfully");
 
         } catch (AssertionError exception) {
 
-            ExtentManager.fail(
-                    "Successful login validation failed: "
-                            + exception.getMessage()
-            );
-
+            ExtentManager.fail("Successful login validation failed: "+ exception.getMessage());
             throw exception;
 
         } catch (Exception exception) {
 
-            ExtentManager.fail(
-                    "Successful login test failed: "
-                            + exception.getMessage()
-            );
-
+            ExtentManager.fail("Successful login test failed: "+ exception.getMessage());
             throw exception;
         }
     }
