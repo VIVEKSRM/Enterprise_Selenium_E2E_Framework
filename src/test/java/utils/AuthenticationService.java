@@ -32,9 +32,7 @@ public class AuthenticationService {
      * @param password password used for login
      * @return HomePage after successful login
      */
-    public HomePage login(
-            String username,
-            String password) {
+    public HomePage login(String username,String password) {
 
         validateCredential(username, "username");
         validateCredential(password, "password");
