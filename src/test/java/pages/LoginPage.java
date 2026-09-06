@@ -20,10 +20,10 @@ public class LoginPage extends BasePage {
             By.cssSelector(".validation-summary-errors");
 
     private final By emailValidationMessage =
-            By.cssSelector("//div[@class='validation-summary-errors']/span");
+            By.xpath("//div[@class='validation-summary-errors']/span");
 
     private final By passwordValidationMessage =
-            By.cssSelector("//div[@class='validation-summary-errors']/ul/li");
+            By.xpath("//div[@class='validation-summary-errors']/ul/li");
 
     private final By loginLink =
             By.cssSelector("a[href='/login']");
