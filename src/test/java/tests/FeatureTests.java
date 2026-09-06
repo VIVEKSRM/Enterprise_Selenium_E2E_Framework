@@ -3,15 +3,12 @@ package tests;
 import core.base.BaseTest;
 import core.utils.ScreenshotUtil;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 /**
  * Collection of small feature tests demonstrating common Selenium actions.

@@ -1,4 +1,11 @@
-﻿<project xmlns="http://maven.apache.org/POM/4.0.0">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+             http://maven.apache.org/POM/4.0.0
+             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.enterprise.selenium</groupId>
@@ -8,49 +15,127 @@
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+
+    <!-- Existing versions retained -->
+    <selenium.version>4.21.0</selenium.version>
+    <testng.version>7.10.2</testng.version>
+    <extent.version>5.1.1</extent.version>
+    <jackson.version>2.17.1</jackson.version>
+    <poi.version>5.2.5</poi.version>
+    <webdrivermanager.version>5.4.1</webdrivermanager.version>
+
+    <!-- Additional dependencies -->
+    <commons-lang3.version>3.14.0</commons-lang3.version>
+    <xmlunit.version>2.10.0</xmlunit.version>
+    <slf4j.version>2.0.13</slf4j.version>
+    <logback.version>1.5.6</logback.version>
+    <rest-assured.version>5.5.0</rest-assured.version>
   </properties>
 
   <dependencies>
+
+    <!-- =========================================================
+         EXISTING DEPENDENCIES - RETAINED
+         ========================================================= -->
+
+    <!-- Selenium WebDriver, PageFactory, WebDriverWait, By, etc. -->
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
-      <version>4.21.0</version>
+      <version>${selenium.version}</version>
     </dependency>
 
+    <!-- TestNG -->
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>7.10.2</version>
+      <version>${testng.version}</version>
     </dependency>
 
+    <!-- Extent Reports -->
     <dependency>
       <groupId>com.aventstack</groupId>
       <artifactId>extentreports</artifactId>
-      <version>5.1.1</version>
+      <version>${extent.version}</version>
     </dependency>
 
+    <!-- Jackson JSON processing -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.17.1</version>
+      <version>${jackson.version}</version>
     </dependency>
 
+    <!-- Excel file handling -->
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-ooxml</artifactId>
-      <version>5.2.5</version>
+      <version>${poi.version}</version>
     </dependency>
 
-    <!-- WebDriverManager to manage browser driver binaries automatically -->
+    <!-- WebDriverManager -->
     <dependency>
       <groupId>io.github.bonigarcia</groupId>
       <artifactId>webdrivermanager</artifactId>
-      <version>5.4.1</version>
+      <version>${webdrivermanager.version}</version>
     </dependency>
+
+
+    <!-- =========================================================
+         ADDITIONAL FRAMEWORK DEPENDENCIES
+         ========================================================= -->
+
+    <!-- Apache Commons utilities -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons-lang3.version}</version>
+    </dependency>
+
+    <!-- XML comparison and validation -->
+    <dependency>
+      <groupId>org.xmlunit</groupId>
+      <artifactId>xmlunit-core</artifactId>
+      <version>${xmlunit.version}</version>
+    </dependency>
+
+    <!-- REST API automation -->
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>${rest-assured.version}</version>
+    </dependency>
+
+    <!-- Logging API -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+
+    <!-- Logging implementation -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+
   </dependencies>
 
   <build>
     <plugins>
+
+      <!-- Java 17 compiler -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>17</release>
+        </configuration>
+      </plugin>
+
+      <!-- TestNG execution through Maven -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -61,6 +146,8 @@
           </suiteXmlFiles>
         </configuration>
       </plugin>
+
     </plugins>
   </build>
+
 </project>

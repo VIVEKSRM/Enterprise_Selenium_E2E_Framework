@@ -1,8 +1,6 @@
 package tests;
 
 import core.base.BaseTest;
-import core.healing.SelfHealingDriver;
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 public class SelfHealingDemoTest extends BaseTest {
